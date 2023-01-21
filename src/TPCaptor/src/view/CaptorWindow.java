@@ -38,12 +38,12 @@ public class CaptorWindow {
         master.setVisible(false);
 
         lvCaptors.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
-            if(oldV != null) {
+            if (oldV != null) {
                 id.textProperty().unbind();
                 nom.textProperty().unbindBidirectional(oldV.getValue().getName());
                 master.setVisible(false);
             }
-            if(newV != null) {
+            if (newV != null) {
                 id.setText(newV.getValue().getId().toString());
                 nom.textProperty().bindBidirectional(newV.getValue().getName());
                 master.setVisible(true);

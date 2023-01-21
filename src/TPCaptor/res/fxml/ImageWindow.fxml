@@ -19,7 +19,8 @@
         </StackPane>
     </center>
     <bottom>
-        <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false" onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER">
+        <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
+                onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="30.0" top="50.0"/>
             </BorderPane.margin>

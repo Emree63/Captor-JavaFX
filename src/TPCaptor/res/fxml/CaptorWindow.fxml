@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: skyblue;" minWidth="500" fx:controller="view.CaptorWindow">
+<BorderPane xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: skyblue;" minWidth="500"
+            fx:controller="view.CaptorWindow">
 
     <left>
         <BorderPane style="-fx-background-color: white;">
@@ -15,7 +16,8 @@
                 <TreeView fx:id="lvCaptors" maxWidth="200"/>
             </top>
             <bottom>
-                <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false" onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER" />
+                <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
+                        onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER"/>
             </bottom>
         </BorderPane>
     </left>
@@ -29,7 +31,7 @@
                         <Label fx:id="id" maxWidth="250"/>
                     </HBox>
                     <HBox>
-                        <Text text="NOM :" style="-fx-fill: white; -fx-font-weight: bold;" />
+                        <Text text="NOM :" style="-fx-fill: white; -fx-font-weight: bold;"/>
                         <TextField fx:id="nom" maxWidth="250"/>
                     </HBox>
                 </VBox>

@@ -15,7 +15,7 @@ public class VisitorCaptor {
         return itemCaptor;
     }
 
-    public TreeItem<Captor> visit(CaptorBasic captor){
+    public TreeItem<Captor> visit(CaptorBasic captor) {
         TreeItem<Captor> itemCaptor = new TreeItem<>(captor, new ImageView(new Image(getClass().getResourceAsStream("/images/captor_icon.png"))));
         return itemCaptor;
     }

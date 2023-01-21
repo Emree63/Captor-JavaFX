@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Captor;
 
-public class ThermostatWindow extends CaptorMonitorWindow{
+public class ThermostatWindow extends CaptorMonitorWindow {
 
     @FXML
     private Text valTemperature;

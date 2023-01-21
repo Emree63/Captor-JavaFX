@@ -19,7 +19,7 @@ public class CaptorStationStub {
         Captor captor2 = new CaptorBasic("Italie", new GenBoundedRandom(-10, 60));
 
         // CaptorArea
-        Captor captorZone = new CaptorArea("Europe", new HashMap<>()){{
+        Captor captorZone = new CaptorArea("Europe", new HashMap<>()) {{
             addCaptor(captor1, 20.0);
             addCaptor(captor2, 40.0);
         }};
