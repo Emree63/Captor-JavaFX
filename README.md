@@ -1,11 +1,11 @@
 # Thermostat (via JavaFX)
 
-:information_source: Réalisation d'une application qui permet de visualiser (et contrôler) des capteurs de température
+:information_source: Réalisation d'une application qui permet de visualiser (et contrôler) des capteurs de température.
 
 Plus précisément, on retrouve :
->  <u>La fenêtre principale</u> : affiche la liste de tous les capteurs et lorsqu'on clique sur un capteur en particulier ces informations s'affichent.
+>  <u>La fenêtre principale</u> : affiche la liste de tous les capteurs et lorsqu'on clique sur un capteur en particulier, ces informations s'affichent.
 <br>
-<u>Une fenêtre avec un thermostat</u> : un spinner qui affiche et changer la température du capteur.
+<u>Une fenêtre avec un thermostat</u> : un spinner qui affiche et permet de changer la température du capteur.
 <br>
 <u>Une fenêtre avec une image</u> : représentant la température du capteur (pour les valeurs < 0°c on a une image de neige/glace, entre 0°c et 25°c une image de nuageux, etc.).
 <br>
@@ -169,9 +169,9 @@ Observable --> "-observers" Observer
 
 @enduml
 ```
-# Répartition du Gitlab
+## Répartition du Gitlab
 
-La racine de mon gitlab est composée de deux doissers essentiels au projet :
+La racine de mon gitlab est composée de deux dossiers essentiels au projet :
 
 [**src**](src) : **Toute la partie codage de l'application**
 
