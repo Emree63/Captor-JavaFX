@@ -7,19 +7,21 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
-<BorderPane prefHeight="250.0" prefWidth="500.0"  xmlns="http://javafx.com/javafx/18"
+<BorderPane prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18"
             xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <Label fx:id="nom" style="-fx-font-weight: bold; -fx-font-size: 22;" BorderPane.alignment="CENTER"/>
     </top>
     <center>
         <StackPane>
-            <ImageView fx:id="image" fitHeight="350.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER"/>
+            <ImageView fx:id="image" fitHeight="350.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true"
+                       BorderPane.alignment="CENTER"/>
             <Label fx:id="labelTemp" style="-fx-font-weight: bold;" BorderPane.alignment="CENTER"/>
         </StackPane>
     </center>
     <bottom>
-        <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false" onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER">
+        <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
+                onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="30.0" top="50.0"/>
             </BorderPane.margin>

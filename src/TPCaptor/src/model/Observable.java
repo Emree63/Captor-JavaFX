@@ -7,11 +7,11 @@ public abstract class Observable {
 
     private List<Observer> observers = new ArrayList<>();
 
-    public void add(Observer o) {
+    public void attach(Observer o) {
         observers.add(o);
     }
 
-    public void remove(Observer o) {
+    public void detach(Observer o) {
         observers.remove(o);
     }
 

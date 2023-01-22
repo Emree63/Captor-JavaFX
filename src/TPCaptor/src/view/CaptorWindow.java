@@ -5,9 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import model.Captor;
-import model.CaptorStationStub;
-import model.VisitorCaptor;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import model.*;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CaptorWindow {
 
@@ -19,6 +21,10 @@ public class CaptorWindow {
     private TextField nom;
     @FXML
     private BorderPane master;
+    @FXML
+    private Button buttonChange;
+    @FXML
+    private VBox vBoxMaster;
     private CaptorStationStub captors = new CaptorStationStub();
 
     public CaptorWindow() throws Exception {
@@ -26,6 +32,39 @@ public class CaptorWindow {
 
     @FXML
     private void initialize() throws Exception {
+        genTreeView();
+        master.setVisible(false);
+        AtomicReference<HBox> hbox = new AtomicReference<>(new HBox());
+        VisitorCaptor visitorCaptor = new VisitorCaptor();
+        lvCaptors.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
+            if (oldV != null) {
+                id.textProperty().unbind();
+                nom.textProperty().unbindBidirectional(oldV.getValue().getName());
+                master.setVisible(false);
+                vBoxMaster.getChildren().remove(hbox.get());
+
+
+            }
+            if (newV != null) {
+                id.setText(newV.getValue().getId().toString());
+                nom.textProperty().bindBidirectional(newV.getValue().getName());
+                master.setVisible(true);
+                try {
+                    hbox.set(newV.getValue().details(visitorCaptor));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                vBoxMaster.getChildren().add(hbox.get());
+            }
+        });
+
+        nom.textProperty().addListener((observable, oldValue, newValue) -> {
+            // This code will be executed whenever the text in the text field changes
+            lvCaptors.refresh();
+        });
+    }
+
+    public void genTreeView() throws Exception {
         TreeItem<Captor> root = new TreeItem<>();
         root.setExpanded(true);
         VisitorCaptor visitorCaptor = new VisitorCaptor();
@@ -35,21 +74,6 @@ public class CaptorWindow {
         }
         lvCaptors.setRoot(root);
         lvCaptors.setShowRoot(false);
-        master.setVisible(false);
-
-        lvCaptors.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
-            if (oldV != null) {
-                id.textProperty().unbind();
-                nom.textProperty().unbindBidirectional(oldV.getValue().getName());
-                master.setVisible(false);
-            }
-            if (newV != null) {
-                id.setText(newV.getValue().getId().toString());
-                nom.textProperty().bindBidirectional(newV.getValue().getName());
-                master.setVisible(true);
-            }
-        });
-
     }
 
     /*
@@ -65,20 +89,35 @@ public class CaptorWindow {
     }*/
 
     public void openWindowImage(ActionEvent actionEvent) {
-        Captor selectedCaptor = lvCaptors.getSelectionModel().getSelectedItem().getValue();
-        ImageWindow imageWindow = new ImageWindow(selectedCaptor);
-        imageWindow.setResizable(false);
-        imageWindow.show();
+        openWindow(new ImageWindow(lvCaptors.getSelectionModel().getSelectedItem().getValue()));
     }
 
-    public void openWindowThermosta(ActionEvent actionEvent) {
-        Captor selectedCaptor = lvCaptors.getSelectionModel().getSelectedItem().getValue();
-        ThermostatWindow thermostaWindow = new ThermostatWindow(selectedCaptor);
-        thermostaWindow.setResizable(false);
-        thermostaWindow.show();
+    public void openWindowThermostat(ActionEvent actionEvent) {
+        openWindow(new ThermostatWindow(lvCaptors.getSelectionModel().getSelectedItem().getValue()));
+    }
+
+    public void openWindow(CaptorMonitorWindow type) {
+        type.setResizable(false);
+        type.show();
     }
 
     public void buttonExit(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void buttonAdd(ActionEvent actionEvent) throws Exception {
+        captors.getGroupe().add(new CaptorBasic("New", new GenBoundedRandom(-30, 40)));
+        genTreeView();
+    }
+
+    public void changeCaptor(ActionEvent actionEvent) {
+        Captor selectedCaptor = lvCaptors.getSelectionModel().getSelectedItem().getValue();
+        if (buttonChange.getText().equals("Start")) {
+            buttonChange.setText("Stop");
+            selectedCaptor.start();
+        } else {
+            buttonChange.setText("Start");
+            selectedCaptor.stop();
+        }
     }
 }

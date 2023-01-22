@@ -8,29 +8,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18"
             xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <Slider orientation="VERTICAL" BorderPane.alignment="CENTER" fx:id="slider" onMouseClicked="#onChange"
-                onMouseDragged="#onChange" showTickLabels="true" showTickMarks="true" min="-30" max="70" value="0">
-            <BorderPane.margin>
-                <Insets/>
-            </BorderPane.margin>
-        </Slider>
+                onMouseDragged="#onChange" showTickLabels="true" showTickMarks="true" min="-30" max="70" value="0"/>
     </center>
-    <bottom>
-        <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
-                onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="30.0" top="50.0"/>
-            </BorderPane.margin>
-        </Button>
-    </bottom>
     <top>
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-              prefHeight="50.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+              prefHeight="50.0" prefWidth="130.0" BorderPane.alignment="CENTER">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thermostat"/>
+                <Label fx:id="nom" style="-fx-font-weight: bold; -fx-font-size: 22;" BorderPane.alignment="CENTER"/>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Température :">
@@ -38,7 +27,7 @@
                                 <Insets right="5.0"/>
                             </HBox.margin>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="XXX" fx:id="valTemperature"/>
+                        <Label fx:id="labelTemp" style="-fx-font-weight: bold;" BorderPane.alignment="CENTER"/>
                     </children>
                 </HBox>
             </children>
@@ -47,4 +36,12 @@
             </BorderPane.margin>
         </VBox>
     </top>
+    <bottom>
+        <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
+                onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="30.0" top="50.0"/>
+            </BorderPane.margin>
+        </Button>
+    </bottom>
 </BorderPane>

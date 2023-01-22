@@ -1,15 +1,29 @@
 # Thermostat (via JavaFX)
 
-:information_source: Une application qui permet de visualiser (et contrôler) un capteur de température
+:information_source: Réalisation d'une application qui permet de visualiser (et contrôler) des capteurs de température
 
->  <u>Une fenêtre avec un thermostat</u> : un spinner qui affiche et changer la température du capteur 
+Plus précisément, on retrouve :
+>  <u>La fenêtre principale</u> : affiche la liste de tous les capteurs et lorsqu'on clique sur un capteur en particulier ces informations s'affichent.
 <br>
-<u>Une fenêtre avec une image</u> : représentant la température du capteur (pour les valeurs < 0°c on a une image de neige/glace, entre 0°c et 25°c une image de nuageux etc.)
+<u>Une fenêtre avec un thermostat</u> : un spinner qui affiche et changer la température du capteur.
+<br>
+<u>Une fenêtre avec une image</u> : représentant la température du capteur (pour les valeurs < 0°c on a une image de neige/glace, entre 0°c et 25°c une image de nuageux, etc.).
 <br>
 De plus, si la fenêtre principale se ferme, toutes les autres fenêtres se ferment.
 
-## Fonctionnement
+- ### Comment lancer le projet ? 
 
+:information_source: *Si vous ne disposez pas d'Intellij IDEA, allé sur le site [jetbrains](https://www.jetbrains.com/idea/download/#section=windows) pour pouvoir le télécharger !!!*
+
+Comme nous allons devoir utiliser la bibliothèque JavaFX, il va falloir l'installer, pour cela rendez-vous sur le site [Download JavaFX](https://gluonhq.com/products/javafx/) et installer sur le système d'exploitation que vous souhaitez (Windows, Linux, etc.), cependant veuillez à choisir l'architecture "x64" et le type "SDK" !
+
+Lorsque que tout est installé, cloner le dépôt et configurer l'idea (mais aussi n'oubliez de configurer le lancement de l'application via le "launcher.main").
+<br>
+:information_source: *Pour vous aider à la configurer, vous pouvez utiliser le site [Doc JavaFX](https://openjfx.io/openjfx-docs/) !*
+
+Lorsque tout est bon, vous pouvez lancer et profiter de l'application. :thumbsup:
+
+## Fonctionnement
 
 ```plantuml
 @startuml
@@ -43,7 +57,7 @@ class CaptorMonitorWindow {
 }
 
 class ImageWindow {
-    - IMAGES : NavigableMap<Double,image>
+    -{static}Images : NavigableMap<Double,Image>
 
     +imageWindow(captor : Captor)
     +update()
@@ -57,7 +71,7 @@ class ThermostatWindow {
 }
 
 class CaptorWindow {
-    +openWindow(type : String, captor : Captor)
+    +openWindow(type : CaptorMonitorWindow)
 }
 
 }
@@ -67,6 +81,8 @@ package model {
 class VisitorCaptor {
     +visit(captor : CaptorArea) : TreeItem<Captor>
     +visit(captor : CaptorBasic) : TreeItem<Captor>
+    +details(captor : CaptorArea) : HBox
+    +details(captor : CaptorBasic) : HBox
 }
 
 class CaptorStationStub {
@@ -88,6 +104,7 @@ class Captor {
     +addCaptor(captor : Captor) 
     +getTemperature() : double
     +accept(visitorCaptor : VisitorCaptor) : TreeItem<Captor>
+    +details(visitorCaptor VisitorCaptor) : HBox
 }
 
 interface GenerationStrategy {
@@ -132,8 +149,9 @@ FXMLWindow --|> "Extends" Stage
 CaptorMonitorWindow --|> FXMLWindow
 CaptorMonitorWindow --> "-captor" Captor
 CaptorMonitorWindow ..|> Observer
+CaptorArea ..|> Observer
 ImageWindow --|> CaptorMonitorWindow
-ThermostaWindow --|> CaptorMonitorWindow
+ThermostatWindow --|> CaptorMonitorWindow
 CaptorStationStub --> "*-captors" Captor
 GenBoundedRandom ..|> GenerationStrategy
 GenFloatingBound ..|> GenerationStrategy
@@ -151,8 +169,7 @@ Observable --> "-observers" Observer
 
 @enduml
 ```
-
-## Répartition du Gitlab
+# Répartition du Gitlab
 
 La racine de mon gitlab est composée de deux doissers essentiels au projet :
 
@@ -162,7 +179,7 @@ La racine de mon gitlab est composée de deux doissers essentiels au projet :
 
 ## Environnement de Travail
 
-L'environnement de travail se base sur un outil en particulier :👇
+L'environnement de travail se base sur plusieurs outils :
 
 <div align = center>
 

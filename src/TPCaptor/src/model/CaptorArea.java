@@ -2,16 +2,18 @@ package model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.HBox;
 
 import java.util.*;
 
-public class CaptorArea extends Captor {
+public class CaptorArea extends Captor implements Observer {
 
     Map<Captor, Double> captors = new HashMap<>();
 
-    public CaptorArea(String name, Map<Captor, Double> captors) {
+    public CaptorArea(String name) {
         super(name);
-        this.captors = captors;
+        captors = new HashMap<>();
+        setValue(10);
     }
 
     @Override
@@ -33,7 +35,7 @@ public class CaptorArea extends Captor {
             Captor captor = entry.getKey();
             double weight = entry.getValue();
 
-            temperatureSum += captor.getTemperature() * weight;
+            temperatureSum += captor.getValue().doubleValue() * weight;
             weightSum += weight;
         }
 
@@ -51,6 +53,7 @@ public class CaptorArea extends Captor {
 
     @Override
     public void addCaptor(Captor captor, double weight) throws Exception {
+        captor.attach(this);
         captors.put(captor, weight);
     }
 
@@ -59,4 +62,27 @@ public class CaptorArea extends Captor {
         return visitorCaptor.visit(this);
     }
 
+    @Override
+    public HBox details(VisitorCaptor visitorCaptor) throws Exception {
+        return visitorCaptor.details(this);
+    }
+
+    @Override
+    public void stop() {
+        for (Map.Entry<Captor, Double> entry : captors.entrySet()) {
+            entry.getKey().stop();
+        }
+    }
+
+    @Override
+    public void start() {
+        for (Map.Entry<Captor, Double> entry : captors.entrySet()) {
+            entry.getKey().start();
+        }
+    }
+
+    @Override
+    public void update() {
+        setValue(getTemperature());
+    }
 }

@@ -15,19 +15,14 @@ public class ImageWindow extends CaptorMonitorWindow {
 
     @FXML
     private ImageView image;
-    @FXML
-    private Label nom;
-    @FXML
-    private Label labelTemp;
-
-    private static NavigableMap<Double, String> Images = new TreeMap<>();
+    private static NavigableMap<Double, Image> Images = new TreeMap<>();
 
     public ImageWindow(Captor captor) {
         super("Image", "/fxml/ImageWindow.fxml", captor);
-        Images.put(25.0, "soleil");
-        Images.put(0.0, "nuage");
+        Images.put(25.0, new Image("/images/soleil.jpg"));
+        Images.put(0.0, new Image("/images/nuage.jpg"));
+        Images.put(-Double.MAX_VALUE, new Image("/images/neige.jpg"));
         nom.textProperty().bind(this.getCaptor().getName());
-        Images.put(-Double.MAX_VALUE, "neige");
         update();
     }
 
@@ -38,11 +33,11 @@ public class ImageWindow extends CaptorMonitorWindow {
     }
 
     public void update() {
-        Map.Entry<Double, String> entry = Images.floorEntry(this.getCaptor().getValue());
+        Map.Entry<Double, Image> entry = Images.floorEntry(this.getCaptor().getValue().doubleValue());
         if (entry != null && entry.getValue() != null) {
-            image.setImage(new Image("/images/" + entry.getValue() + ".jpg"));
+            image.setImage(entry.getValue());
         }
-        labelTemp.setText(String.format("%.2f°C", this.getCaptor().getValue()));
+        labelTemp.setText(String.format("%.2f°C", this.getCaptor().getValue().doubleValue()));
     }
 
 }

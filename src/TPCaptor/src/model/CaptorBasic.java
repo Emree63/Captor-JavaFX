@@ -3,8 +3,11 @@ package model;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.Map;
 
 public class CaptorBasic extends Captor implements Runnable {
 
+    private Timeline time;
     private GenStrategy genStrategie;
 
     public CaptorBasic(String name, GenStrategy genStrategie) {
@@ -48,16 +52,30 @@ public class CaptorBasic extends Captor implements Runnable {
 
     @Override
     public void run() {
-        Timeline time = new Timeline(
+        time = new Timeline(
                 new KeyFrame(Duration.seconds(this.getTime()), event -> {
                     if (getGenStrategy() != null) {
                         this.setValue(this.getGenStrategy().generate());
                     }
                 }
                 ));
-
         time.setCycleCount(Animation.INDEFINITE);
         time.play();
+    }
+
+    @Override
+    public HBox details(VisitorCaptor visitorCaptor) {
+        return visitorCaptor.details(this);
+    }
+
+    @Override
+    public void stop() {
+        time.stop();
+    }
+
+    @Override
+    public void start() {
+        run();
     }
 
     @Override

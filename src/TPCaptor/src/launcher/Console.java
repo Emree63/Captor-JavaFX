@@ -18,7 +18,7 @@ public class Console {
 
 
         // CaptorArea
-        Captor captorZone = new CaptorArea("Europe", new HashMap<>());
+        Captor captorZone = new CaptorArea("Europe");
         captorZone.addCaptor(captor1, 20.0);
         captorZone.addCaptor(captor2, 40.0);
         System.out.println(captorZone.getId() + ": " + captorZone.getName() + ", temperature : " + captorZone.getTemperature());

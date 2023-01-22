@@ -7,15 +7,21 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: skyblue;" minWidth="500" fx:controller="view.CaptorWindow">
+<BorderPane xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: skyblue;" minWidth="500"
+            fx:controller="view.CaptorWindow">
 
     <left>
         <BorderPane style="-fx-background-color: white;">
             <top>
-                <TreeView fx:id="lvCaptors" maxWidth="200"/>
+                <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
+                        onAction="#buttonAdd" text="Ajouter" BorderPane.alignment="CENTER"/>
             </top>
+            <center>
+                <TreeView fx:id="lvCaptors" maxWidth="200"/>
+            </center>
             <bottom>
-                <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false" onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER" />
+                <Button style="-fx-background-color: transparent; -fx-font-weight: bold;" mnemonicParsing="false"
+                        onAction="#buttonExit" text="Fermer" BorderPane.alignment="CENTER"/>
             </bottom>
         </BorderPane>
     </left>
@@ -23,21 +29,22 @@
     <center>
         <BorderPane fx:id="master">
             <top>
-                <VBox>
+                <VBox fx:id="vBoxMaster">
                     <HBox>
                         <Text text="UUID :" style="-fx-fill: white; -fx-font-weight: bold;"/>
                         <Label fx:id="id" maxWidth="250"/>
                     </HBox>
                     <HBox>
-                        <Text text="NOM :" style="-fx-fill: white; -fx-font-weight: bold;" />
+                        <Text text="NOM :" style="-fx-fill: white; -fx-font-weight: bold;"/>
                         <TextField fx:id="nom" maxWidth="250"/>
+                        <Button text="STOP" fx:id="buttonChange" onAction="#changeCaptor"/>
                     </HBox>
                 </VBox>
             </top>
             <bottom>
                 <HBox>
                     <Button mnemonicParsing="false" text="Image" onAction="#openWindowImage"/>
-                    <Button mnemonicParsing="false" text="Thermostat" onAction="#openWindowThermosta"/>
+                    <Button mnemonicParsing="false" text="Thermostat" onAction="#openWindowThermostat"/>
                 </HBox>
             </bottom>
         </BorderPane>

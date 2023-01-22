@@ -8,7 +8,6 @@ public class GenCPU implements GenStrategy {
 
     @Override
     public double generate() {
-
         File file = new File("/sys/class/thermal/thermal_zone2/temp");
         Scanner scanner = null;
         String line = null;
